@@ -1,0 +1,4 @@
+Here is where David keeps notes on stuff for this project...
+
+Django External Authentication:
+http://docs.djangoproject.com/en/dev/topics/auth/#other-authentication-sources
