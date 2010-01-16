@@ -1,0 +1,27 @@
+This document contains instructions on how to install the cube bookstore website.
+
+= Dependencies = 
+
+The steps below assume the most basic setup, using sqlite and django's test server. Use Django's documentation for how to use production applications like Apache or MySQL. There are a few dependencies on a client for TWU's authentication system (twuPass), which are not released with the main website. The twuPass module uses python-suds.
+
+Before starting, make sure you have [http://python.org/download/ python 2.x], [http://www.djangoproject.com/ django], and [http://subversion.tigris.org/ subversion] installed. If not using the twuPass authentication backend, some modifications will need to be made to the code. If you are using twuPass however, make sure [http://pypi.python.org/pypi/setuptools setuptools] and suds are installed as well, and that you are using python 2.5+.
+
+<wiki:comment>
+Put a link to how to modify code for non twuPass users if that ever happens
+</wiki:comment>
+
+= Steps =
+The steps below are the minimum necessary to get the website up and running for testing purposes. For a production setup, please expand on these steps by referring to django's documentation.
+
+  # [http://code.google.com/p/cube-bookstore/source/checkout Get the cube-bookstore code]
+  # copy cube/settings-dist.py. to cube/settings.py
+  # open cube/settings.py in your favourite text editor
+  # put your name and email address into the ADMINS tuple.
+  # set the MEDIA_ROOT to the absolute path of cube-bookstore's media folder
+  # set MEDIA_URL to '(your-domain)/site_media/'. e.g. 'localhost:8000/site_media/' By default urls.py is setup to serve media files via django's test server. Don't do this for production situations.
+  # add the absolute path to the templates folder to TEMPLATE_DIRS.
+  # At this point you will either need to setup twuPass with the provided documentation, or modify the website to use a different authentication backend.
+  # now if you run the unitests ('python cube/manage.py test') then they should all pass successfully.
+  # To run the website, execute
+   # python cube/manage.py syncdb
+   # python cube/manage.py runserver
