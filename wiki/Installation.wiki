@@ -17,9 +17,12 @@ The steps below are the minimum necessary to get the website up and running for 
   # copy cube/settings-dist.py. to cube/settings.py
   # open cube/settings.py in your favourite text editor
   # put your name and email address into the ADMINS tuple.
+  # Set the DATABASE_ENGINE to 'sqlite3'
+  # Set the DATABASE_PATH to be where you want the database file to be stored
   # set the MEDIA_ROOT to the absolute path of cube-bookstore's media folder
   # set MEDIA_URL to '(your-domain)/site_media/'. e.g. 'localhost:8000/site_media/' By default urls.py is setup to serve media files via django's test server. Don't do this for production situations.
   # add the absolute path to the templates folder to TEMPLATE_DIRS.
+  # now open cube/urls.py and find the site_media entry. In the dictionary, change the 'document_root's value to the absolute path of where your media files are.
   # At this point you will either need to setup twuPass with the provided documentation, or modify the website to use a different authentication backend.
   # now if you run the unitests ('python cube/manage.py test') then they should all pass successfully.
   # To run the website, execute
