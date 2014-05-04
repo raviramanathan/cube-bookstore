@@ -96,18 +96,21 @@ def update_book(request):
     bunch = Book.objects.none()
     action = request.POST.get("Action", '')
 
-    # We need at least 1 thing to edit, otherwise bad things can happen
-    if not request.POST.has_key('idToEdit1'):
+    has_id_to_edit = False
+    for key, value in request.POST.items():
+        if "idToEdit" in key:
+            bunch = bunch | Book.objects.filter(pk=int(value))
+            has_id_to_edit = True
+
+    if not has_id_to_edit:
+        # We need at least 1 thing to edit, otherwise bad things can happen
         var_dict = {
             'message' : "Didn't get any books to process",
         }
         t = loader.get_template('400.html')
-        c = RC(request, var_dict)
+	c = RC(request, var_dict)
         return HttpResponseBadRequest(t.render(c))
-    for key, value in request.POST.items():
-        if "idToEdit" in key:
-            bunch = bunch | Book.objects.filter(pk=int(value))
-            
+
     if action == "Delete":
         bunch = bunch.exclude(status='D')
         for book in bunch:
